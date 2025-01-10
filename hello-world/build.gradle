@@ -11,8 +11,8 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.example'
-version = '0.0.1-SNAPSHOT'
+group = 'cool.heller.uli'
+version = '0.1.0'
 sourceCompatibility = '17'
 
 repositories {
