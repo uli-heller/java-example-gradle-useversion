@@ -32,6 +32,4 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'cool.heller.uli:hello-world:+'
-        implementation 'cool.heller.uli:bye-moon:+'
 }
