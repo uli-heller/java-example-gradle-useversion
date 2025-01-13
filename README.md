@@ -73,3 +73,40 @@ BUILD FAILED in 1s
   ```
 
 - `./gradlew build` -> works
+
+A possible solution:
+
+```diff
+--- build-useversion.gradle	2025-01-13 22:36:37.512069105 +0100
++++ build-useversion-2.gradle	2025-01-13 22:37:37.016185920 +0100
+@@ -30,11 +30,14 @@
+         }
+ }
+ 
++def writeLocksFlag = project.hasProperty("writeLocks") ? writeLocks : false
++
+ dependencies {
+         implementation 'org.springframework.boot:spring-boot-starter-web'
+-        implementation 'cool.heller.uli:hello-world:+'
+-        implementation 'cool.heller.uli:bye-moon:+'
++        implementation 'cool.heller.uli:hello-world'
++        implementation 'cool.heller.uli:bye-moon'
+ 
++        if (writeLocksFlag) {
+         configurations.all {
+             resolutionStrategy.eachDependency {  DependencyResolveDetails details ->
+                 if (details.requested.group.startsWith("cool.heller.uli")) {
+@@ -45,3 +48,4 @@
+             }
+         }
+ }
++}
+```
+
+With this:
+
+- `create-maven-repository.sh`
+- `./gradlew -b build-useversion-2.gradle dependencies --write-locks -PwriteLocks=true` -> version 0.0.0 shows up within the lockfiles
+- `./gradlew -b build-useversion-2.gradle build` -> works
+- `create-maven-repository.sh 1`
+- `./gradlew -b build-useversion-2.gradle build` -> fails
