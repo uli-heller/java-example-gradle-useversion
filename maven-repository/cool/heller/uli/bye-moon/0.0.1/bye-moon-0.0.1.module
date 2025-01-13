@@ -1,0 +1,77 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "cool.heller.uli",
+    "module": "bye-moon",
+    "version": "0.0.1",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.11.1"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "bye-moon-0.0.1-plain.jar",
+          "url": "bye-moon-0.0.1-plain.jar",
+          "size": 781,
+          "sha512": "65f7bfadf5236c8ff9cd43345fec4fead568ce8b9fdd2493ecfabd6f86081a0ba4490b2753e4d7a608dc7d504c6c1754c9b0d9a665ce398ca5db3ba11cc29635",
+          "sha256": "5ca5841abc46b06f964b576bdf116f97d5a084587d22b49c7c5fcfd362ef2fa4",
+          "sha1": "a8fd65a1261f535164810cad8daa517bee6a4d88",
+          "md5": "d5c414211d3272d5e3d37685f9bb3a5e"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 17,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-dependencies",
+          "version": {
+            "requires": "3.4.1"
+          },
+          "attributes": {
+            "org.gradle.category": "platform"
+          },
+          "endorseStrictVersions": true
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-web"
+        }
+      ],
+      "files": [
+        {
+          "name": "bye-moon-0.0.1-plain.jar",
+          "url": "bye-moon-0.0.1-plain.jar",
+          "size": 781,
+          "sha512": "65f7bfadf5236c8ff9cd43345fec4fead568ce8b9fdd2493ecfabd6f86081a0ba4490b2753e4d7a608dc7d504c6c1754c9b0d9a665ce398ca5db3ba11cc29635",
+          "sha256": "5ca5841abc46b06f964b576bdf116f97d5a084587d22b49c7c5fcfd362ef2fa4",
+          "sha1": "a8fd65a1261f535164810cad8daa517bee6a4d88",
+          "md5": "d5c414211d3272d5e3d37685f9bb3a5e"
+        }
+      ]
+    }
+  ]
+}
