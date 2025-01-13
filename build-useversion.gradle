@@ -38,6 +38,7 @@ dependencies {
 	configurations.all {
             resolutionStrategy.eachDependency {	 DependencyResolveDetails details ->
                 if (details.requested.group.startsWith("cool.heller.uli")) {
+                    println("Requested name: ${details.requested.name} version: ${details.requested.version}")
                     // Ensures dynamic version is always used
                     details.useVersion "+" // seems to resolve the version ALWAYS
                 }
