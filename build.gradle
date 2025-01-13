@@ -34,4 +34,15 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
         implementation 'cool.heller.uli:hello-world:+'
         implementation 'cool.heller.uli:bye-moon:+'
+
+	configurations.all {
+            resolutionStrategy.eachDependency {	 DependencyResolveDetails details ->
+                if (details.requested.group.startsWith("cool.heller.uli")) {
+                    // Ensures dynamic version is always used
+                    details.useVersion "+"
+                    // Disable caching for this dependency
+                    //resolutionStrategy.cacheDynamicVersionsFor 0, 'seconds'
+                }
+            }
+	}
 }
