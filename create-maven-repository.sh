@@ -1,4 +1,7 @@
 #!/bin/sh
+#
+# ./create-maven-repository.sh (version-cnt)
+#
 D="$(dirname "$0")"
 D="$(realpath "${D}")"
 
@@ -7,10 +10,11 @@ MAVEN_REPOSITORY_URL="file://${MAVEN_REPOSITORY}"
 
 rm -rf "${MAVEN_REPOSITORY}"
 
-( cd hello-world; "${D}/gradlew" publish -Pversion=0.0.0 -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
-( cd bye-moon; "${D}/gradlew" publish -Pversion=0.0.0 -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
+CNT="$1"
+test -z "$CNT" && CNT=5
 
-test "$1" -ge 1 && {
-  ( cd hello-world; "${D}/gradlew" publish -Pversion=0.1.0 -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
-  ( cd bye-moon; "${D}/gradlew" publish -Pversion=0.0.1 -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
-}
+for V in $(seq 1 ${CNT}); do
+  VERSION="0.${V}.0"
+  ( cd hello-world; "${D}/gradlew" publish -Pversion=${VERSION} -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
+  ( cd bye-moon; "${D}/gradlew" publish -Pversion=${VERSION} -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
+done
