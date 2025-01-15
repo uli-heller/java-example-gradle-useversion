@@ -1,5 +1,46 @@
-java-example-gradle-dependency-problems
-=======================================
+java-example-gradle-useversion
+==============================
+
+For a huge project, my team and myself
+create lots of utility libraries (libs) and publish
+them to a maven repository. These libs
+are used by other gradle projects.
+
+<!--more-->
+
+Goals
+-----
+
+- all gradle projects should use a "similar" version of the libs, i.e. '0.+'
+- the version should be specified in a central place
+- the number of libs may vary over time, i.e. we start with "hello-world",
+  add "bye-moon" later on, add "maybe-mars" even later and so on
+
+Contraints
+----------
+
+For other parts, I created a BOM project containing constraints
+of various components, something like
+
+- my-platform
+  - build.gradle
+    ```
+    ...
+    dependencies {
+      constraints {
+        api('cool.heller.xml:my-xml-reader:2.+')
+        api('cool.heller.xml:my-xml-writer:3.+')
+	...
+      }
+    }
+    ```
+
+I cannot use this approach for the libs, since
+it would require to list all the available lists within
+the constraints. I want the list to be variable!
+
+
+
 
 Rough Plan
 ----------
