@@ -2,6 +2,9 @@
 #
 # ./create-maven-repository.sh (version-start) (version-cnt)
 #
+# ./create-maven-repository.sh 1 5
+# -> creates versions 1.1.0, 1.2.0, 1.3.0, 1.4.0, 1.5.0
+#
 D="$(dirname "$0")"
 D="$(realpath "${D}")"
 
