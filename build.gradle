@@ -34,6 +34,6 @@ dependencies {
   implementation platform(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
   //implementation platform("org.springframework.boot:spring-boot-dependencies:3.4.1")
   implementation 'org.springframework.boot:spring-boot-starter-web'
-  implementation 'cool.heller.uli:hello-world:0.1.0' // with version
+  implementation 'cool.heller.uli:hello-world:0.1.0' // with bad version
   implementation 'cool.heller.uli:bye-moon'          // without version
 }
