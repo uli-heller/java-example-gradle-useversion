@@ -8,7 +8,7 @@ D="$(realpath "${D}")"
 MAVEN_REPOSITORY="${D}/maven-repository"
 MAVEN_REPOSITORY_URL="file://${MAVEN_REPOSITORY}"
 
-rm -rf "${MAVEN_REPOSITORY}"
+#rm -rf "${MAVEN_REPOSITORY}"
 
 VERSION_START="$1"
 test -z "${VERSION_START}" && VERSION_START=0.
