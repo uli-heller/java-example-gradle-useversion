@@ -1,0 +1,15 @@
+ext {
+  coolHellerUliVersion='1.+'
+}
+
+allprojects {
+  dependencies {
+    configurations.all {
+      resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'cool.heller.uli') {
+          details.useVersion coolHellerUliVersion
+        }
+      }
+    }
+  }
+}

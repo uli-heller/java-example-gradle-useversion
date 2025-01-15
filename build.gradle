@@ -9,7 +9,7 @@ plugins {
 	id 'org.springframework.boot' version '3.4.1'
 }
 
-apply plugin: 'io.spring.dependency-management'
+apply from:   'cool-heller-uli.gradle'
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-        implementation 'cool.heller.uli:hello-world:+'
-        implementation 'cool.heller.uli:bye-moon:+'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'cool.heller.uli:hello-world:0.1.0' // with version
+  implementation 'cool.heller.uli:bye-moon'          // without version
 }

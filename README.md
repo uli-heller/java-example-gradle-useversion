@@ -11,13 +11,15 @@ are used by other gradle projects.
 Goals
 -----
 
+- gradle projects may use the libs already, specifying bad versions for them.
+  These should be overridden!
 - all gradle projects should use a "similar" version of the libs, i.e. '0.+'
 - the version should be specified in a central place
 - the number of libs may vary over time, i.e. we start with "hello-world",
   add "bye-moon" later on, add "maybe-mars" even later and so on
 
-Contraints
-----------
+Constraints
+-----------
 
 For other parts, I created a BOM project containing constraints
 of various components, something like
@@ -39,6 +41,36 @@ I cannot use this approach for the libs, since
 it would require to list all the available lists within
 the constraints. I want the list to be variable!
 
+UseVersion
+----------
+
+build.gradle:
+
+```
+...
+apply from:  'cool-heller-uli.gradle'
+...
+``
+
+cool-heller-uli.gradle:
+
+```
+ext {
+  coolHellerUliVersion='1.+'
+}
+
+allprojects {
+  dependencies {
+    configurations.all {
+      resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+        if (details.requested.group == 'cool.heller.uli') {
+          details.useVersion coolHellerUliVersion
+        }
+      }
+    }
+  }
+}
+```
 
 
 
