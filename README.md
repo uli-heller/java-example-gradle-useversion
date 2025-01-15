@@ -72,8 +72,8 @@ allprojects {
 }
 ```
 
-Test procedure
---------------
+Basic Test Procedure
+---------------------
 
 ```
 rm -rf maven-repository
@@ -89,3 +89,58 @@ Works quite good!
 - Latest version matching '1.+' is used
 - Version '0.1.0' of hello-world is ignored
 - Unspecified version for bye-moon works, too
+
+Using Gradle Dependency Locking
+-------------------------------
+
+```
+rm -rf maven-repository
+./create-maven-repository.sh 0 2
+./create-maven-repository.sh 1 2
+./gradlew dependencies --write-locks             # --> BUILD SUCCESSFUL, *lockfile created
+./gradlew build                                  # --> BUILD SUCCESSFUL
+unzip -v build/libs/java*SNAPSHOT.jar|grep hello # --> hello-world-1.2.0-plain.jar
+unzip -v build/libs/java*SNAPSHOT.jar|grep bye   # --> bye-moon-1.2.0-plain.jar
+```
+
+Using Gradle Dependency Locking With Fresh Dependencies
+-------------------------------------------------------
+
+```
+rm -rf maven-repository
+./create-maven-repository.sh 0 2
+./create-maven-repository.sh 1 2
+./gradlew dependencies --write-locks             # --> BUILD SUCCESSFUL, *lockfile created
+./create-maven-repository.sh 1 3
+./gradlew build                                  # --> BUILD FAILED
+```
+
+The build fails with this error message:
+
+```
+$ ./gradlew build
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.11.1/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Could not resolve all files for configuration ':compileClasspath'.
+   > Did not resolve 'cool.heller.uli:bye-moon:1.2.0' which has been forced / substituted to a different version: '1.3.0'
+   > Did not resolve 'cool.heller.uli:hello-world:1.2.0' which has been forced / substituted to a different version: '1.3.0'
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 5s
+1 actionable task: 1 executed
+```
+
+This is kindof unexpected!
+I hoped that the build will silently use version 1.2.0,
+the version we locked previously!
