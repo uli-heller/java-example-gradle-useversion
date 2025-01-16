@@ -195,3 +195,11 @@ gradle.lockfile:cool.heller:maybe-mars:1.2.0=compileClasspath,productionRuntimeC
 ```
 
 So: I do guess the issue is within "useVersion()"!
+
+Outcome
+-------
+
+I discussed the issue here: [GradleForum - Dependency Locking and useVersion](https://discuss.gradle.org/t/dependency-locking-and-useversion/50256)
+Outcome: Do NOT use `useVersion()`!
+
+Many thanks to Björn Kautler.
