@@ -144,3 +144,54 @@ BUILD FAILED in 5s
 This is kindof unexpected!
 I hoped that the build will silently use version 1.2.0,
 the version we locked previously!
+
+Adding A Gradle Dependency Without useVersion
+---------------------------------------------
+
+I added a dependency named "maybe-mars". It uses the same
+dynamic version "1.+", but without any usage of "useVersion()".
+
+Same as before:
+
+```
+rm -rf maven-repository
+./create-maven-repository.sh 0 2
+./create-maven-repository.sh 1 2
+./gradlew dependencies --write-locks             # --> BUILD SUCCESSFUL, *lockfile created
+./create-maven-repository.sh 1 3
+./gradlew build                                  # --> BUILD FAILED
+```
+
+Within the error message, "maybe-mars" does **NOT** show up:
+
+```
+java-example-gradle-useversion$ ./gradlew build
+> Task :compileJava FAILED
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Could not resolve all files for configuration ':compileClasspath'.
+   > Did not resolve 'cool.heller.uli:hello-world:1.2.0' which has been forced / substituted to a different version: '1.3.0'
+   > Did not resolve 'cool.heller.uli:bye-moon:1.2.0' which has been forced / substituted to a different version: '1.3.0'
+
+* Try:
+> Run with --stacktrace option to get the stack trace.
+> Run with --info or --debug option to get more log output.
+> Run with --scan to get full insights.
+> Get more help at https://help.gradle.org.
+
+BUILD FAILED in 1s
+```
+
+Within the lockfile, all three dependencies look similar:
+
+```
+java-example-gradle-useversion$ grep heller *lockfile
+gradle.lockfile:cool.heller.uli:bye-moon:1.2.0=compileClasspath,productionRuntimeClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+gradle.lockfile:cool.heller.uli:hello-world:1.2.0=compileClasspath,productionRuntimeClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+gradle.lockfile:cool.heller:maybe-mars:1.2.0=compileClasspath,productionRuntimeClasspath,runtimeClasspath,testCompileClasspath,testRuntimeClasspath
+```
+
+So: I do guess the issue is within "useVersion()"!
