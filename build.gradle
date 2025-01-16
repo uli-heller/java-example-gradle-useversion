@@ -36,4 +36,5 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'cool.heller.uli:hello-world:0.1.0' // with bad version
   implementation 'cool.heller.uli:bye-moon'          // without version
+  implementation 'cool.heller:maybe-mars:1.+'        // without useVersion
 }
