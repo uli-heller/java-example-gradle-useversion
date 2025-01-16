@@ -1,16 +1,10 @@
-buildscript {
-    configurations.classpath {
-        resolutionStrategy.activateDependencyLocking()
-    }
-}
-
 plugins {
 	id 'java'
         id 'maven-publish'
 	id 'org.springframework.boot' version '3.4.1'
 }
 
-group = 'cool.heller.uli'
+group = 'cool.heller'
 //version = '0.1.0'
 
 java {
