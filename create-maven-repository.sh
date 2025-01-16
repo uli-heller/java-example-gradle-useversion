@@ -23,4 +23,5 @@ for V in $(seq 1 ${CNT}); do
   VERSION="${VERSION_START}.${V}.0"
   ( cd hello-world; "${D}/gradlew" publish -Pversion=${VERSION} -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
   ( cd bye-moon; "${D}/gradlew" publish -Pversion=${VERSION} -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
+  ( cd maybe-mars; "${D}/gradlew" publish -Pversion=${VERSION} -PmavenRepositoryUrl="${MAVEN_REPOSITORY_URL}" )
 done
